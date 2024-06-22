@@ -1,25 +1,29 @@
+import {Input, Button} from "@nextui-org/react";
+
 export const Form = ({ username, setUsername, password, setPassword, label, onSubmit }) => {
     return (
         <div className="auth-container">
-            <form onSubmit={onSubmit}>
-                <h2>{label}</h2>
-                <div className="form-group">
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}/>
-                </div>
-                <button type="submit">Submit</button>
+            <form onSubmit={onSubmit} className="form">
+                <h2 className="text-white text-2xl mb-1 pt-3">{label}</h2>
+                <Input
+                    isRequired
+                    type="text"
+                    id="username"
+                    value={username}
+                    label="Имя пользователя"
+                    className="max-w-xs form-item"
+                    onChange={(e) => setUsername(e.target.value)}/>
+            
+                <Input
+                    isRequired
+                    label="Пароль"
+                    type="password"
+                    id="password"
+                    value={password}
+                    className="max-w-xs form-item"
+                    onChange={(e) => setPassword(e.target.value)}/>
+                
+                <Button color="primary" className="max-w-xs self-center" type="submit">Submit</Button>
             </form>
         </div>
     )
