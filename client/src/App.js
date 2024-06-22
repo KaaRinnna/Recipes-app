@@ -1,0 +1,29 @@
+import './App.css';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {Home} from "./pages/home";
+import { Auth } from "./pages/auth";
+import {CreateRecipe} from "./pages/create-recipe";
+import {SavedRecipe} from "./pages/saved-recipe";
+import {Navigation} from "./components/navbar";
+import {NextUIProvider} from "@nextui-org/react";
+
+function App() {
+
+  return (
+    <NextUIProvider>
+      <div className="App">
+        <Router>
+          <Navigation/>
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/auth" element={<Auth/>} />
+            <Route path="/create-recipe" element={<CreateRecipe/>} />
+            <Route path="/saved-recipe" element={<SavedRecipe/>} />
+          </Routes>
+        </Router>
+      </div>
+    </NextUIProvider>
+  );
+}
+
+export default App;
