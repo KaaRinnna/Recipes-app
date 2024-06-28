@@ -23,17 +23,22 @@ router.post('/register', async (req, res) => {
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    const user = await UserModel.findOne({ username });
-    if (!user) {
-        res.json({ message: "User doesn't exists"});
-    }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-        return res.json({ message: "Username or password isn't correct" });
+    try {
+        const user = await UserModel.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ message: "User doesn't exists"});
+        }
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: "Username or password isn't correct" });
+        }
+        const token = jwt.sign({ id: user._id }, secret);
+        res.json({ token, userID: user._id });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
     }
-    const token = jwt.sign({ id: user._id }, secret);
-    res.json({ token, userID: user._id });
 });
 
 export { router as userRouter };
