@@ -42,11 +42,11 @@ export const Navigation = () => {
 
             <NavbarContent justify="end">
                     {!cookies.access_token ? (<>
-                        <NavbarItem className="hidden lg:flex">
+                        <NavbarItem className="hidden sm:flex">
                             <Link to="/auth">Login</Link>
                         </NavbarItem>
 
-                        <NavbarItem className="hidden lg:flex">
+                        <NavbarItem className="hidden sm:flex">
                             <Link to="/auth">Sign Up</Link>
                         </NavbarItem></>
                         
